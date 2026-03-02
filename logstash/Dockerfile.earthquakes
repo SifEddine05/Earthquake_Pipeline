@@ -6,7 +6,7 @@ RUN rm -f /usr/share/logstash/pipeline/logstash.conf
 # (Optional) Install plugins if needed
 # Kafka input is usually already available in the official image,
 # but we can ensure it's installed to avoid surprises.
-RUN bin/logstash-plugin install logstash-input-kafka
+# RUN bin/logstash-plugin install logstash-input-kafka
 
 # Copy our pipeline configuration
 COPY ./logstash/earthquakes/ /usr/share/logstash/pipeline/
