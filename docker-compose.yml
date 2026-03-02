@@ -75,7 +75,7 @@ services:
     container_name: earthquakes-logstash
     build:
       context: .
-      dockerfile: logstash/Dockerfile.logstash_earthquakes   # <-- adapte ce chemin
+      dockerfile: logstash/Dockerfile.earthquakes   # <-- adapte ce chemin
     depends_on:
       elasticsearch:
         condition: service_healthy
