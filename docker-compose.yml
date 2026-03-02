@@ -106,17 +106,17 @@ services:
       - elk-network
 
   # Spark Master (official image)
-  spark-master:
-    image: apache/spark:3.5.1
-    container_name: spark-master
-    command: ["/opt/spark/bin/spark-class", "org.apache.spark.deploy.master.Master"]
-    ports:
-      - "8080:8080"
-      - "7077:7077"
-    networks:
-      - spark-network
-    volumes:
-      - ./spark_jobs:/opt/spark-apps
+spark-master:
+  image: apache/spark:3.5.1
+  container_name: spark-master
+  command: ["/opt/spark/bin/spark-class", "org.apache.spark.deploy.master.Master"]
+  ports:
+    - "8080:8080"
+    - "7077:7077"
+  networks:
+    - spark-network
+  volumes:
+    - ./spark_jobs:/opt/spark-apps
 
 spark-worker:
   image: apache/spark:3.5.1
