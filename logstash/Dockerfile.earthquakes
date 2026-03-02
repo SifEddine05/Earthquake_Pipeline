@@ -9,7 +9,7 @@ RUN rm -f /usr/share/logstash/pipeline/logstash.conf
 RUN bin/logstash-plugin install logstash-input-kafka
 
 # Copy our pipeline configuration
-COPY ./logstash/pipeline-earthquakes/ /usr/share/logstash/pipeline/
+COPY ./logstash/earthquakes/ /usr/share/logstash/pipeline/
 
 # Copy pipelines.yml
 COPY ./logstash/pipeline.yml /usr/share/logstash/config/pipelines.yml
