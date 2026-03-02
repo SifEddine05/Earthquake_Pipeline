@@ -1,0 +1,10 @@
+{
+    "subreddit_names": ["CryptoCurrency", "CryptoMarkets"],
+    "keywords_dict": {
+        "bitcoin": ["btc", "bitcoin"],
+        "ethereum": ["eth", "ethereum"],
+        "dogecoin": ["doge", "dogecoin"],
+        "trumpcoin": ["trump", "trumpcoin"],
+        "solana": ["sol", "solana"]
+    }
+}

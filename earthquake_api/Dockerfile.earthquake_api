@@ -1,0 +1,26 @@
+# Use Python 3.10 slim image
+FROM python:3.10-slim
+
+# Set the working directory inside the container
+WORKDIR /code
+
+# Install minimal OS packages (curl is useful for debugging/health checks)
+RUN apt-get update && apt-get install -y --no-install-recommends curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements and install dependencies
+COPY ./earthquake_api/requirements.txt /code/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+
+# Copy the application code
+COPY ./earthquake_api /code/earthquake_api
+
+# (Optional) If you want the container to include env vars file
+# Better practice is to pass env via docker-compose, but this works for school projects
+COPY .env /code/earthquake_api/.env
+
+# Expose API port (optional, mainly documentation)
+EXPOSE 8000
+
+# Run FastAPI app
+CMD ["uvicorn", "earthquake_api.main:app", "--host", "0.0.0.0", "--port", "8000"]

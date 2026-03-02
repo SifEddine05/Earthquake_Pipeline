@@ -1,0 +1,104 @@
+[
+  {
+    "index": "earthquakes",
+    "mapping": {
+      "settings": {
+        "index.max_ngram_diff": 8,
+        "analysis": {
+          "analyzer": {
+            "ngram_analyzer": {
+              "type": "custom",
+              "tokenizer": "ngram_tokenizer",
+              "filter": ["lowercase"]
+            }
+          },
+          "tokenizer": {
+            "ngram_tokenizer": {
+              "type": "ngram",
+              "min_gram": 3,
+              "max_gram": 8,
+              "token_chars": ["letter", "digit"]
+            }
+          }
+        }
+      },
+      "mappings": {
+        "properties": {
+
+          "event_id": { 
+            "type": "keyword" 
+          },
+
+          "title": {
+            "type": "text",
+            "analyzer": "english",
+            "fields": {
+              "keyword": { "type": "keyword" },
+              "ngram": {
+                "type": "text",
+                "analyzer": "ngram_analyzer"
+              },
+              "fuzzy": {
+                "type": "text",
+                "analyzer": "standard"
+              }
+            }
+          },
+
+          "place": {
+            "type": "text",
+            "analyzer": "english",
+            "fields": {
+              "keyword": { "type": "keyword" },
+              "ngram": {
+                "type": "text",
+                "analyzer": "ngram_analyzer"
+              },
+              "fuzzy": {
+                "type": "text",
+                "analyzer": "standard"
+              }
+            }
+          },
+
+          "magnitude": {
+            "type": "float"
+          },
+
+          "time_iso": {
+            "type": "date"
+          },
+
+          "time_ms": {
+            "type": "long"
+          },
+
+          "updated_ms": {
+            "type": "long"
+          },
+
+          "tsunami": {
+            "type": "integer"
+          },
+
+          "type": {
+            "type": "keyword"
+          },
+
+          "url": {
+            "type": "keyword",
+            "index": false
+          },
+
+          "coordinates": {
+            "type": "geo_point"
+          },
+
+          "source": {
+            "type": "keyword"
+          }
+        }
+      }
+    }
+  }
+]

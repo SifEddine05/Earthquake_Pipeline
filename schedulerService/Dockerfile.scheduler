@@ -1,0 +1,24 @@
+# Use Python 3.10 slim image
+FROM python:3.10-slim
+
+# Workdir
+WORKDIR /code
+
+# Install minimal tools (curl useful for debugging/health checks)
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+COPY ./schedulerService/requirements.txt /code/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+
+# Copy scheduler code
+COPY ./schedulerService /code/schedulerService
+
+# Optional: copy .env inside container (ok for school project)
+# Best practice is env_file in docker-compose, but this makes it work standalone too
+COPY .env /code/.env
+
+# Run the scheduler
+CMD ["python", "-u", "schedulerService/main.py"]

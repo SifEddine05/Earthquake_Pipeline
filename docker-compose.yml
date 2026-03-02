@@ -1,0 +1,146 @@
+services:
+  # Kafka (single node - KRaft)
+  kafka:
+    image: apache/kafka:3.9.2
+    container_name: kafka
+    ports:
+      - "29092:9094"
+    networks:
+      - kafkanet
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,EXTERNAL://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+
+  # Elasticsearch
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.10.2
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - xpack.security.http.ssl.enabled=false
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9200"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+    networks:
+      - elk-network
+      - spark-network
+
+  # Kibana
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.10.2
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    networks:
+      - elk-network
+
+  # Earthquake API (FastAPI)
+  earthquake-api:
+    container_name: earthquake-api
+    build:
+      context: .
+      dockerfile: earthquake_api/Dockerfile.earthquake_api   # <-- adapte ce chemin
+    ports:
+      - "8000:8000"
+    environment:
+      - KAFKA_BROKERS=kafka:9092
+    depends_on:
+      - kafka
+    networks:
+      - kafkanet
+
+  # Logstash (earthquakes pipeline)
+  earthquakes-logstash:
+    container_name: earthquakes-logstash
+    build:
+      context: .
+      dockerfile: logstash/Dockerfile.logstash_earthquakes   # <-- adapte ce chemin
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+    networks:
+      - kafkanet
+      - elk-network
+
+  # Scheduler (calls /send_data daily + ensures indices)
+  scheduler-service:
+    container_name: scheduler-service
+    build:
+      context: .
+      dockerfile: schedulerService/Dockerfile.scheduler
+    environment:
+      - REQUEST_NEW_DATA_HOURS=02:00
+      - EARTHQUAKE_API=http://earthquake-api:8000
+      - ES_ENDPOINT=http://elasticsearch:9200
+      - MIN_MAGNITUDE=0.0
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+      earthquake-api:
+        condition: service_started
+    networks:
+      - kafkanet
+      - elk-network
+
+  # Spark Master (official image)
+  spark-master:
+    image: spark:python3
+    container_name: spark-master
+    command: >
+      bash -lc "/opt/spark/sbin/start-master.sh &&
+               tail -f /opt/spark/logs/*"
+    ports:
+      - "8080:8080"
+      - "7077:7077"
+    networks:
+      - spark-network
+
+  # Spark Worker (official image)
+  spark-worker:
+    image: spark:python3
+    container_name: spark-worker
+    command: >
+      bash -lc "/opt/spark/sbin/start-worker.sh spark://spark-master:7077 &&
+               tail -f /opt/spark/logs/*"
+    ports:
+      - "8081:8081"
+    depends_on:
+      - spark-master
+    networks:
+      - spark-network
+
+networks:
+  kafkanet:
+    name: kafkanet
+  elk-network:
+    name: elk-network
+  spark-network:
+    name: spark-network
+
+volumes:
+  elasticsearch_data:
+    driver: local
+    name: elasticsearch_data
