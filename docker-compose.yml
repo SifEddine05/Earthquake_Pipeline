@@ -107,30 +107,27 @@ services:
 
   # Spark Master (official image)
   spark-master:
-    image: spark:python3
+    image: apache/spark:3.5.1
     container_name: spark-master
-    command: >
-      bash -lc "/opt/spark/sbin/start-master.sh &&
-               tail -f /opt/spark/logs/*"
+    command: ["/opt/spark/bin/spark-class", "org.apache.spark.deploy.master.Master"]
     ports:
       - "8080:8080"
       - "7077:7077"
     networks:
       - spark-network
+    volumes:
+      - ./spark_jobs:/opt/spark-apps
 
-  # Spark Worker (official image)
-  spark-worker:
-    image: spark:python3
-    container_name: spark-worker
-    command: >
-      bash -lc "/opt/spark/sbin/start-worker.sh spark://spark-master:7077 &&
-               tail -f /opt/spark/logs/*"
-    ports:
-      - "8081:8081"
-    depends_on:
-      - spark-master
-    networks:
-      - spark-network
+spark-worker:
+  image: apache/spark:3.5.1
+  container_name: spark-worker
+  command: ["/opt/spark/bin/spark-class", "org.apache.spark.deploy.worker.Worker", "spark://spark-master:7077"]
+  ports:
+    - "8081:8081"
+  networks:
+    - spark-network
+  depends_on:
+    - spark-master
 
 networks:
   kafkanet:
