@@ -1,0 +1,299 @@
+{
+  "took" : 6,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 11,
+      "relation" : "eq"
+    },
+    "max_score" : 7.324363,
+    "hits" : [
+      {
+        "_index" : "earthquakes",
+        "_id" : "us7000s0ig",
+        "_score" : 7.324363,
+        "_source" : {
+          "location" : {
+            "lat" : 43.7075,
+            "lon" : 150.5866
+          },
+          "tsunami" : 0,
+          "data_source" : "usgs",
+          "time_iso" : "2026-02-26T17:04:49.884000Z",
+          "type" : "earthquake",
+          "place" : "273 km SE of Kuril’sk, Russia",
+          "title" : "M 5.0 - 273 km SE of Kuril’sk, Russia",
+          "magnitude" : 5,
+          "updated_ms" : 1772127148040,
+          "coordinates" : [
+            150.5866,
+            43.7075,
+            10
+          ],
+          "@timestamp" : "2026-02-26T17:04:49.884Z",
+          "url" : "https://earthquake.usgs.gov/earthquakes/eventpage/us7000s0ig",
+          "time_ms" : 1772125489884,
+          "source" : "usgs"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_id" : "us7000s0ek",
+        "_score" : 6.370097,
+        "_source" : {
+          "location" : {
+            "lat" : 50.0615,
+            "lon" : 156.8372
+          },
+          "tsunami" : 0,
+          "data_source" : "usgs",
+          "time_iso" : "2026-02-26T07:04:25.452000Z",
+          "type" : "earthquake",
+          "place" : "84 km SE of Severo-Kuril’sk, Russia",
+          "title" : "M 5.1 - 84 km SE of Severo-Kuril’sk, Russia",
+          "magnitude" : 5.1,
+          "updated_ms" : 1772090405040,
+          "coordinates" : [
+            156.8372,
+            50.0615,
+            47.728
+          ],
+          "@timestamp" : "2026-02-26T07:04:25.452Z",
+          "url" : "https://earthquake.usgs.gov/earthquakes/eventpage/us7000s0ek",
+          "time_ms" : 1772089465452,
+          "source" : "usgs"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_id" : "us7000s0kh",
+        "_score" : 5.361169,
+        "_source" : {
+          "location" : {
+            "lat" : 48.1783,
+            "lon" : 146.3881
+          },
+          "tsunami" : 0,
+          "data_source" : "usgs",
+          "time_iso" : "2026-02-26T20:07:52.094000Z",
+          "type" : "earthquake",
+          "place" : "268 km ESE of Poronaysk, Russia",
+          "title" : "M 4.0 - 268 km ESE of Poronaysk, Russia",
+          "magnitude" : 4,
+          "updated_ms" : 1772138329040,
+          "coordinates" : [
+            146.3881,
+            48.1783,
+            480.617
+          ],
+          "@timestamp" : "2026-02-26T20:07:52.094Z",
+          "url" : "https://earthquake.usgs.gov/earthquakes/eventpage/us7000s0kh",
+          "time_ms" : 1772136472094,
+          "source" : "usgs"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_id" : "us7000s0dq",
+        "_score" : 4.727586,
+        "_source" : {
+          "location" : {
+            "lat" : 51.5562,
+            "lon" : 159.6915
+          },
+          "tsunami" : 0,
+          "data_source" : "usgs",
+          "time_iso" : "2026-02-26T04:59:03.922000Z",
+          "type" : "earthquake",
+          "place" : "176 km SSE of Vilyuchinsk, Russia",
+          "title" : "M 5.7 - 176 km SSE of Vilyuchinsk, Russia",
+          "magnitude" : 5.7,
+          "updated_ms" : 1772169535589,
+          "coordinates" : [
+            159.6915,
+            51.5562,
+            10
+          ],
+          "@timestamp" : "2026-02-26T04:59:03.922Z",
+          "url" : "https://earthquake.usgs.gov/earthquakes/eventpage/us7000s0dq",
+          "time_ms" : 1772081943922,
+          "source" : "usgs"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_id" : "us7000s0e2",
+        "_score" : 4.727586,
+        "_source" : {
+          "location" : {
+            "lat" : 51.4879,
+            "lon" : 159.7652
+          },
+          "tsunami" : 0,
+          "data_source" : "usgs",
+          "time_iso" : "2026-02-26T05:30:35.592000Z",
+          "type" : "earthquake",
+          "place" : "185 km SSE of Vilyuchinsk, Russia",
+          "title" : "M 4.5 - 185 km SSE of Vilyuchinsk, Russia",
+          "magnitude" : 4.5,
+          "updated_ms" : 1772092246040,
+          "coordinates" : [
+            159.7652,
+            51.4879,
+            10
+          ],
+          "@timestamp" : "2026-02-26T05:30:35.592Z",
+          "url" : "https://earthquake.usgs.gov/earthquakes/eventpage/us7000s0e2",
+          "time_ms" : 1772083835592,
+          "source" : "usgs"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_id" : "us7000s0es",
+        "_score" : 4.727586,
+        "_source" : {
+          "location" : {
+            "lat" : 51.3228,
+            "lon" : 159.8201
+          },
+          "tsunami" : 0,
+          "data_source" : "usgs",
+          "time_iso" : "2026-02-26T05:57:46.296000Z",
+          "type" : "earthquake",
+          "place" : "203 km SSE of Vilyuchinsk, Russia",
+          "title" : "M 4.5 - 203 km SSE of Vilyuchinsk, Russia",
+          "magnitude" : 4.5,
+          "updated_ms" : 1772095840040,
+          "coordinates" : [
+            159.8201,
+            51.3228,
+            10
+          ],
+          "@timestamp" : "2026-02-26T05:57:46.296Z",
+          "url" : "https://earthquake.usgs.gov/earthquakes/eventpage/us7000s0es",
+          "time_ms" : 1772085466296,
+          "source" : "usgs"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_id" : "us7000s0ea",
+        "_score" : 4.727586,
+        "_source" : {
+          "location" : {
+            "lat" : 51.2738,
+            "lon" : 159.3975
+          },
+          "tsunami" : 0,
+          "data_source" : "usgs",
+          "time_iso" : "2026-02-26T05:58:47.245000Z",
+          "type" : "earthquake",
+          "place" : "196 km SSE of Vilyuchinsk, Russia",
+          "title" : "M 5.0 - 196 km SSE of Vilyuchinsk, Russia",
+          "magnitude" : 5,
+          "updated_ms" : 1772087331040,
+          "coordinates" : [
+            159.3975,
+            51.2738,
+            10
+          ],
+          "@timestamp" : "2026-02-26T05:58:47.245Z",
+          "url" : "https://earthquake.usgs.gov/earthquakes/eventpage/us7000s0ea",
+          "time_ms" : 1772085527245,
+          "source" : "usgs"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_id" : "us7000s0kg",
+        "_score" : 4.727586,
+        "_source" : {
+          "location" : {
+            "lat" : 51.4614,
+            "lon" : 159.6331
+          },
+          "tsunami" : 0,
+          "data_source" : "usgs",
+          "time_iso" : "2026-02-26T20:01:34.309000Z",
+          "type" : "earthquake",
+          "place" : "183 km SSE of Vilyuchinsk, Russia",
+          "title" : "M 4.3 - 183 km SSE of Vilyuchinsk, Russia",
+          "magnitude" : 4.3,
+          "updated_ms" : 1772137699040,
+          "coordinates" : [
+            159.6331,
+            51.4614,
+            15.028
+          ],
+          "@timestamp" : "2026-02-26T20:01:34.309Z",
+          "url" : "https://earthquake.usgs.gov/earthquakes/eventpage/us7000s0kg",
+          "time_ms" : 1772136094309,
+          "source" : "usgs"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_id" : "us7000s0k1",
+        "_score" : 4.727586,
+        "_source" : {
+          "location" : {
+            "lat" : 51.6353,
+            "lon" : 159.3523
+          },
+          "tsunami" : 0,
+          "data_source" : "usgs",
+          "time_iso" : "2026-02-26T18:57:52.655000Z",
+          "type" : "earthquake",
+          "place" : "158 km SSE of Vilyuchinsk, Russia",
+          "title" : "M 4.6 - 158 km SSE of Vilyuchinsk, Russia",
+          "magnitude" : 4.6,
+          "updated_ms" : 1772133830040,
+          "coordinates" : [
+            159.3523,
+            51.6353,
+            35
+          ],
+          "@timestamp" : "2026-02-26T18:57:52.655Z",
+          "url" : "https://earthquake.usgs.gov/earthquakes/eventpage/us7000s0k1",
+          "time_ms" : 1772132272655,
+          "source" : "usgs"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_id" : "us7000s0ed",
+        "_score" : 4.727586,
+        "_source" : {
+          "location" : {
+            "lat" : 51.4062,
+            "lon" : 159.6494
+          },
+          "tsunami" : 0,
+          "data_source" : "usgs",
+          "time_iso" : "2026-02-26T06:07:30.078000Z",
+          "type" : "earthquake",
+          "place" : "189 km SSE of Vilyuchinsk, Russia",
+          "title" : "M 4.6 - 189 km SSE of Vilyuchinsk, Russia",
+          "magnitude" : 4.6,
+          "updated_ms" : 1772088796040,
+          "coordinates" : [
+            159.6494,
+            51.4062,
+            10
+          ],
+          "@timestamp" : "2026-02-26T06:07:30.078Z",
+          "url" : "https://earthquake.usgs.gov/earthquakes/eventpage/us7000s0ed",
+          "time_ms" : 1772086050078,
+          "source" : "usgs"
+        }
+      }
+    ]
+  }
+}

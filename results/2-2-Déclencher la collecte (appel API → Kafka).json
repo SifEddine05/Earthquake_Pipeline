@@ -1,0 +1,1 @@
+{"status":"success","result":{"total_events_fetched":85,"total_events_sent_to_kafka":85,"topic":"earthquakes"}}
